@@ -3,6 +3,7 @@
 
 #include "Player/MECharacterBase.h"
 #include "Player/MEPlayerState.h"
+#include "Player/MEPlayerController.h"
 #include "AbilitySystem/MEAbilitySystemComponent.h"
 // Sets default values
 AMECharacterBase::AMECharacterBase()
@@ -31,6 +32,15 @@ void AMECharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMECharacterBase::OnHealthChanged(float newHealth, float MaxHealth)
+{
+	AMEPlayerController* pc = GetController<AMEPlayerController>();
+	if (pc)
+	{
+		pc->OnHealthChanged(newHealth, MaxHealth);
+	}
 }
 
 void AMECharacterBase::PossessedBy(AController* NewController)

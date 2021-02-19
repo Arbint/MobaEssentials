@@ -26,17 +26,21 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
+	virtual void OnHealthChanged(float newHealth, float MaxHealth);
 	
 	virtual void PossessedBy(AController* NewController) override;
-	
+	UFUNCTION(BlueprintCallable, Category = "AbilitySystem")
+	class UMEAbilitySystemComponent* GetASC() {return AbilityComp; }
+
+	virtual void OnRep_PlayerState() override;
+	private:
 	/*
 	Initialize the ability system component lived on the player state.
 		-	called by PossessedBy() so the server does the initialization
 		-	called by OnRep_PlayerState() so the client initializes it
 	*/
 	void InitAbilitySystemCompFromState();
-	virtual void OnRep_PlayerState() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayAbility")
+	UPROPERTY()
 	class UMEAbilitySystemComponent* AbilityComp;
 };
