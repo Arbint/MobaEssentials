@@ -18,6 +18,13 @@ AMEPlayerState::AMEPlayerState()
 void AMEPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InitDefaultAttributes();
+	SetupAttributeUpdateCallbacks();
+}
+
+void AMEPlayerState::InitDefaultAttributes()
+{
 	if (GE_StartValues)
 	{
 		FGameplayEffectContextHandle EffectContext = GetAbilitySystemComponent()->MakeEffectContext();
@@ -28,7 +35,6 @@ void AMEPlayerState::BeginPlay()
 			GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*StartValHandle.Data.Get(), GetAbilitySystemComponent());
 		}
 	}
-	SetupAttributeUpdateCallbacks();
 }
 
 UAbilitySystemComponent* AMEPlayerState::GetAbilitySystemComponent() const
@@ -41,7 +47,6 @@ void AMEPlayerState::HealthChanged(const FOnAttributeChangeData& Data)
 	AMECharacterBase* Character = GetPawn<AMECharacterBase>();
 	if (Character)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HealthUpdated: max: %f, current: %f"), AttributeSet->GetMaxHealth(), Data.NewValue)
 		Character->OnHealthChanged(Data.NewValue, AttributeSet->GetMaxHealth());
 	}
 }

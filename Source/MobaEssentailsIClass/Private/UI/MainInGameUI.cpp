@@ -10,6 +10,5 @@ void UMainInGameUI::NativeConstruct()
 
 void UMainInGameUI::UpdateHealthBar(float percent)
 {
-	UE_LOG(LogTemp, Warning, TEXT("updating percent: %f"), percent)
 	HealthBar->SetValue(percent);
 }

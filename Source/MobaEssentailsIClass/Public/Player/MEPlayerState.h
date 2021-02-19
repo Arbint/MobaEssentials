@@ -20,14 +20,20 @@ class MOBAESSENTAILSICLASS_API AMEPlayerState : public APlayerState, public IAbi
 public:
 	AMEPlayerState();
 	virtual void BeginPlay() override;
+
+
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	class UMEAttributeSet* GetAttributeSet() const {return AttributeSet; }
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Defaults")
 	TSubclassOf<UGameplayEffect> GE_StartValues;
 private:
+
+	void InitDefaultAttributes();
+	virtual void SetupAttributeUpdateCallbacks();
+
+	//callbacks
 	virtual void HealthChanged(const FOnAttributeChangeData& Data);
 	//should be called after setting the basic values
-	virtual void SetupAttributeUpdateCallbacks();
 private:
 
 	UMEAbilitySystemComponent* AbilityComp;
