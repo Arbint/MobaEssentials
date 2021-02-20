@@ -34,6 +34,9 @@ public:
 	FGameplayAttributeData MoveSpeed;
 	ATTRIBUTE_ACCESSORS(UMEAttributeSet, MoveSpeed)
 
+    UPROPERTY(BlueprintReadOnly, Category = "Damage")
+    FGameplayAttributeData Damage;
+    ATTRIBUTE_ACCESSORS(UMEAttributeSet, Damage)
 
     void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;    
     void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data) override;

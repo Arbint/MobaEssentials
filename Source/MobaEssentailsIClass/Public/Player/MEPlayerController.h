@@ -15,8 +15,12 @@ class MOBAESSENTAILSICLASS_API AMEPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	AMEPlayerController();
 	void OnHealthChanged(float newHealth, float MaxHealth);
 	virtual void BeginPlay() override;
+
+	void CreateUI();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<class UMainInGameUI> MainInGameUIClass;
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "UI")

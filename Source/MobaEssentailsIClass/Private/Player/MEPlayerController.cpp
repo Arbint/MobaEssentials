@@ -4,6 +4,11 @@
 #include "Player/MEPlayerController.h"
 #include "UI/MainInGameUI.h"
 
+AMEPlayerController::AMEPlayerController()
+{
+	bReplicates = true;	
+}
+
 void AMEPlayerController::OnHealthChanged(float newHealth, float MaxHealth)
 {
 	if (MainUI)
@@ -15,7 +20,13 @@ void AMEPlayerController::OnHealthChanged(float newHealth, float MaxHealth)
 void AMEPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (MainInGameUIClass)
+	CreateUI();
+
+}
+
+void AMEPlayerController::CreateUI()
+{
+	if (MainInGameUIClass && IsLocalController())
 	{
 		MainUI = CreateWidget<UMainInGameUI>(this, MainInGameUIClass);
 		if (MainUI)

@@ -29,11 +29,13 @@ public:
 private:
 
 	void InitDefaultAttributes();
+
+	//should be called after setting the basic values
 	virtual void SetupAttributeUpdateCallbacks();
 
 	//callbacks
 	virtual void HealthChanged(const FOnAttributeChangeData& Data);
-	//should be called after setting the basic values
+	virtual void MoveSpeedChanged(const FOnAttributeChangeData& Data);
 private:
 
 	UMEAbilitySystemComponent* AbilityComp;

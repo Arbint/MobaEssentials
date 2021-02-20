@@ -4,6 +4,7 @@
 #include "Player/MEPlayerState.h"
 #include "AbilitySystem/MEAttributeSet.h"
 #include "Player/MECharacterBase.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 AMEPlayerState::AMEPlayerState()
 {
@@ -51,7 +52,17 @@ void AMEPlayerState::HealthChanged(const FOnAttributeChangeData& Data)
 	}
 }
 
+void AMEPlayerState::MoveSpeedChanged(const FOnAttributeChangeData& Data)
+{
+	AMECharacterBase* Character = GetPawn<AMECharacterBase>();
+	if (Character)
+	{
+	Character->GetCharacterMovement()->MaxWalkSpeed = Data.NewValue;
+	}
+}
+
 void AMEPlayerState::SetupAttributeUpdateCallbacks()
 {
 	AbilityComp->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHealthAttribute()).AddUObject(this, &AMEPlayerState::HealthChanged);
+	AbilityComp->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMoveSpeedAttribute()).AddUObject(this, &AMEPlayerState::MoveSpeedChanged);
 }

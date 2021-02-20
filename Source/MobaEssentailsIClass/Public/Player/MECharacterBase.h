@@ -41,6 +41,10 @@ public:
 	*/
 	void InitAbilitySystemCompFromState();
 
+	UFUNCTION(BlueprintCallable, Category = "Debug")
+	TMap<FName, int> GetGamePlayTagInfo();
+
 	UPROPERTY()
 	class UMEAbilitySystemComponent* AbilityComp;
+
 };

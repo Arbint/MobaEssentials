@@ -7,8 +7,7 @@
 
 UMEAttributeSet::UMEAttributeSet()
 {
-	Health.SetBaseValue(200.f);
-	MaxHealth.SetBaseValue(200.f);
+	InitDamage(15.f);
 }
 
 void UMEAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
